@@ -13,9 +13,38 @@ const winningCombination = [
   [6, 7, 8],
 ];
 
+// p1 (circle)
+// p2 (cross)
+const PLAYER_1 = "circle";
+const PLAYER_2 = "cross";
+let playerTurn = PLAYER_1;
+
+function switchPlayer() {
+  playerTurn = playerTurn === PLAYER_1 ? PLAYER_2 : PLAYER_1;
+}
+
+// Function to mark cell
+function markCell(cell) {
+  // marking cell according to player
+  cell.classList.add(playerTurn);
+
+  switchPlayer();
+}
+
+// Function to check if cell already marked
+
+function checkCell(cell) {
+  if (cell.classList.contains("cross") || cell.classList.contains("circle")) {
+    return false;
+  }
+  return true;
+}
+
 //  Adding event listner on cell
 cells.forEach((cell) => {
   cell.addEventListener("click", () => {
-    console.log("Hello World");
+    if (checkCell(cell)) {
+      markCell(cell);
+    }
   });
 });
