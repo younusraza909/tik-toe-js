@@ -31,6 +31,7 @@ body {
 }
 
 .cell {
+  position: relative;
   background-color: black;
   border: 7px solid;
   cursor: pointer;
@@ -40,4 +41,26 @@ body {
       rgba(252, 70, 107, 1) 100%
     )
     1;
+}
+
+.cell.cross::after {
+  content: "X";
+  position: absolute;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: red;
+  font-size: 10rem;
+}
+
+.cell.circle::after {
+  content: "O";
+  position: absolute;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: green;
+  font-size: 10rem;
 }
