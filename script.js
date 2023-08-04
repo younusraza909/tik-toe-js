@@ -13,6 +13,9 @@ const winningCombination = [
   [6, 7, 8],
 ];
 
+// Array to save game state
+const gameState = [];
+
 // p1 (circle)
 // p2 (cross)
 const PLAYER_1 = "circle";
@@ -28,7 +31,7 @@ function markCell(cell) {
   // marking cell according to player
   cell.classList.add(playerTurn);
 
-  switchPlayer();
+  gameState[cell.dataset.index] = playerTurn;
 }
 
 // Function to check if cell already marked
@@ -40,11 +43,37 @@ function checkCell(cell) {
   return true;
 }
 
+// Checking if current player won
+function checkWin() {
+  let isWin = winningCombination.some((combination) => {
+    return combination.every((c) => gameState[c] === playerTurn);
+  });
+
+  return isWin;
+}
+
+function isDraw() {
+  return gameState.length === 9 && !gameState.includes(undefined);
+}
+
 //  Adding event listner on cell
 cells.forEach((cell) => {
   cell.addEventListener("click", () => {
     if (checkCell(cell)) {
       markCell(cell);
+
+      // Check after making current player move is he/she won the game
+      if (checkWin()) {
+        // State if any user win
+        console.log(`${playerTurn} Wins`);
+        return;
+      }
+
+      if (isDraw()) {
+        console.log("Game was drawn");
+      }
+
+      switchPlayer();
     }
   });
 });
