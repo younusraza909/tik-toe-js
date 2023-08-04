@@ -1,3 +1,6 @@
+// Element Selection
+const cells = document.querySelectorAll(".cell");
+
 // This is an array whcih contain all possible combination of winning
 const winningCombination = [
   [0, 1, 2],
@@ -9,3 +12,10 @@ const winningCombination = [
   [3, 4, 5],
   [6, 7, 8],
 ];
+
+//  Adding event listner on cell
+cells.forEach((cell) => {
+  cell.addEventListener("click", () => {
+    console.log("Hello World");
+  });
+});
